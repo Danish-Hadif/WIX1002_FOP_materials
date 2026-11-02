@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.Random;
 /**
  *
- * @author Fadzli Sham Hussin
+ * @author Danish hadif
  */
 public class Lab04 {
     public static void main(String[] args) {
