@@ -1,0 +1,263 @@
+    /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week4;
+import java.util.Scanner;
+import java.util.Random;
+/**
+ *
+ * @author Fadzli Sham Hussin
+ */
+public class Lab04 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter an integer; ");
+        int num = input.nextInt();
+        if(num<0){
+            System.out.println("Enter only positive number ");
+        }
+        else{
+            System.out.print("Factors of "+num+" in increasing order is: ");
+        }
+        for(int i = 1; i<=num; i++){
+            if(num % i ==0){
+                System.out.print(i+ " ");
+            }
+        }
+        System.out.println();
+        //Q2
+        System.out.println("Enter a positive integer: ");
+        int num1 = input.nextInt();
+        int sum = 0;
+        for(int i = 1; i<=num1; i++){
+            int currentsum = 0;
+            for(int j = 1; j<=i;j++){
+                currentsum += j;
+            }
+            sum += currentsum;
+        }
+        System.out.println(sum);
+        //Q3
+        double sum1 = 0;
+        double sumOfSquares = 0;
+        int count = 0;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int score;
+        do{
+            System.out.print("Enter score (negative integer to quit); ");
+            score = input.nextInt();
+            if (score >= 0) {
+                sum1 += score;
+                sumOfSquares += (score * score);
+                count++;
+                
+                if (score < min) {
+                    min = score;
+                }
+                if (score > max) {
+                    max = score;
+                }
+            }
+                    
+        }
+        while(score >= 0);
+        // Check if at least one valid score was entered
+        if (count > 0) {
+            double average = sum1 / count;
+            double variance = 0;
+            double standardDeviation = 0;
+            if (count > 1) {
+                variance = (sumOfSquares - (sum1 * sum1) / count) / (count - 1);
+                standardDeviation = Math.sqrt(variance);
+            }
+            System.out.println(variance);
+            System.out.println("Minimum Score: " + min);
+            System.out.println("Maximum Score: " + max);
+            System.out.printf("Average Score: %.2f\n", average);
+            System.out.printf("Standard Deviation: %.2f\n", standardDeviation);
+        
+        }
+        else{
+            System.out.println("No valid scores entered ");
+        }
+        //Q4
+        // 1. Accept inputs from the user
+        System.out.print("Enter the year: ");
+        int year = input.nextInt();
+
+        System.out.print("Enter the first day of the year (0 for Sunday, 1 for Monday, ..., 6 for Saturday): ");
+        int firstDayOfYear = input.nextInt();
+
+        // 2. Check if it's a leap year inline
+        boolean isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        int febDays = isLeap ? 29 : 28;
+
+        // 3. Calculate starting days for May and August
+        int daysBeforeMay = 31 + febDays + 31 + 30;
+        int mayStartDay = (firstDayOfYear + daysBeforeMay) % 7;
+
+        int daysBeforeAugust = daysBeforeMay + 31 + 30 + 31;
+        int augustStartDay = (firstDayOfYear + daysBeforeAugust) % 7;
+        System.out.println("\n------------------------------------");
+        System.out.println("             May " + year);
+        System.out.println("------------------------------------");
+        System.out.println("Sun  Mon  Tue  Wed  Thu  Fri  Sat");
+        // Loop to print leading spaces for the first week
+        for (int i = 0; i < mayStartDay; i++) {
+            System.out.print("     ");
+        }
+        // Loop to print the days of May (31 days)
+        for (int day = 1; day <= 31; day++) {
+            System.out.printf("%-5d", day);
+            if ((day + mayStartDay) % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n------------------------------------");
+        System.out.println("\n------------------------------------");
+        System.out.println("           August " + year);
+        System.out.println("------------------------------------");
+        System.out.println("Sun  Mon  Tue  Wed  Thu  Fri  Sat");
+        // Loop to print leading spaces for the first week
+        for (int i = 0; i < augustStartDay; i++) {
+            System.out.print("     ");
+        }
+        // Loop to print the days of August (31 days)
+        for (int day = 1; day <= 31; day++) {
+            System.out.printf("%-5d", day);
+            if ((day + augustStartDay) % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n------------------------------------");
+        
+        //Q5
+        Random rand = new Random();
+        int score1 =0;
+        int score2 =0;
+        System.out.println("=== Welcome to the Two-Player Dice Game! ===");
+        System.out.println("Rule: First player to reach MORE than 100 points wins.");
+        System.out.println("Special: If you roll a 6, you get another turn!\n");
+        while (score1 <= 100 && score2 <= 100) {
+            System.out.println("\n----------------------------------------");
+            System.out.println("Player 1's turn. Current Score: " + score1);
+            boolean player1Again = true;
+            while (player1Again && score1 <= 100) {
+                System.out.print("Player 1, press Enter to roll the dice...");
+                input.nextLine();
+                
+                int roll = rand.nextInt(6) + 1; // Generates a random number from 1 to 6
+                System.out.println("-> You rolled a: " + roll);
+                
+                score1 += roll;
+                System.out.println("-> Player 1 total score: " + score1);
+                
+                // Special condition: if roll is 6, roll again. Otherwise, end turn.
+                if (roll == 6) {
+                    System.out.println("✨ You rolled a 6! You get another turn!");
+                }
+                else{
+                    player1Again = false;
+                }
+                
+            }
+            if (score1 > 100) {
+                System.out.println("\n🎉 Player 1 wins the game with " + score1 + " points!");
+                break;
+            }
+            System.out.println("\n----------------------------------------");
+            System.out.println("Player 2's turn. Current Score: " + score2);
+            boolean player2Again = true;
+            while (player2Again && score2 <= 100) {
+                System.out.print("Player 2, press Enter to roll the dice...");
+                input.nextLine();
+                
+                int roll = rand.nextInt(6) + 1;
+                System.out.println("-> You rolled a: " + roll);
+                
+                score2 += roll;
+                System.out.println("-> Player 2 total score: " + score2);
+                
+                // Special condition: if roll is 6, roll again. Otherwise, end turn.
+                if (roll == 6) {
+                    System.out.println("✨ You rolled a 6! You get another turn!");
+                }
+                else{
+                    player2Again = false;
+                }
+            }
+            if(score2>100){
+                System.out.println("\n🎉 Player 2 wins the game with " + score2 + " points!");
+                break;
+            }
+        }
+        
+        //Q6
+        int number = rand.nextInt(100001);
+        System.out.println("Random integer is: " + number);
+        String numtr = Integer.toString(number);
+        for(int i = 0; i<numtr.length();i++ ){
+            System.out.println(numtr.charAt(i));
+        }
+        
+        //Q7
+        double totalInterestAccumulated = 0.0;
+        System.out.print("Enter principle amount: ");
+        double P = input.nextDouble();
+        System.out.print("Enter interest in %; ");
+        double I = input.nextDouble();
+        System.out.print("Enter total number of months: ");
+        int N = input.nextInt();
+        double monthlyrate = I*(12*100);
+        double M = (P * monthlyrate) / (1 - Math.pow(1 + monthlyrate, -N));
+        System.out.printf("%-6s %18s %16s %15s %18s %18s%n", 
+                "Month", "Monthly Payment", "Principal", "Interest", "Unpaid Balance", "Total Interest");
+        for (int n = 1; n <= N; n++) {
+            // Principal portion due (Cn)
+            double Cn = M * Math.pow(1 + monthlyrate, -(1 + N - n));
+            double Ln = M - Cn;
+            double Rn = (Ln / monthlyrate) - Cn;
+            if (n == N || Rn < 0.01) {
+                Rn = 0.00;
+            }
+            totalInterestAccumulated += Ln;
+            System.out.printf("%-6d %18.2f %16.2f %15.2f %18.2f %18.2f%n", 
+                    n, M, Cn, Ln, Rn, totalInterestAccumulated);
+        }
+        
+        //Q8
+        int n = rand.nextInt(101);
+        
+        System.out.println("Generated n: " + n);
+        
+        if (n <= 0) {
+            System.out.println("n is 0. No prime numbers to display.");
+        }
+        else{
+            System.out.println("The first " + n + " prime numbers are:");
+            int count1 = 0;
+            int candidate = 2;
+            while (count1 < n) {
+                boolean isPrime = true;
+                for(int i = 2; i*i<=candidate;i++){
+                    if(candidate%i == 0){
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    System.out.print(candidate + " ");
+                    count1++;
+                }
+                candidate++;
+            }
+        }
+        
+        
+        
+           
+    }
+    
+}
