@@ -11,6 +11,7 @@ import java.util.Random;
  */
 public class Lab04 {
     public static void main(String[] args) {
+        //Q1
         Scanner input = new Scanner(System.in);
         System.out.print("Enter an integer; ");
         int num = input.nextInt();
@@ -201,30 +202,37 @@ public class Lab04 {
         for(int i = 0; i<numtr.length();i++ ){
             System.out.println(numtr.charAt(i));
         }
+        for(int i = 0; i<numtr.length(); i++){
+            int num11 = number;
+            num1 = num11/10;
+            if(num1<=0){
+                break;
+            }
+            count++; 
+            
+        }
         
         //Q7
-        double totalInterestAccumulated = 0.0;
-        System.out.print("Enter principle amount: ");
-        double P = input.nextDouble();
-        System.out.print("Enter interest in %; ");
-        double I = input.nextDouble();
-        System.out.print("Enter total number of months: ");
-        int N = input.nextInt();
-        double monthlyrate = I*(12*100);
-        double M = (P * monthlyrate) / (1 - Math.pow(1 + monthlyrate, -N));
-        System.out.printf("%-6s %18s %16s %15s %18s %18s%n", 
-                "Month", "Monthly Payment", "Principal", "Interest", "Unpaid Balance", "Total Interest");
+        Scanner sc = new Scanner(System.in);
+        double M, P, I, C, L, R, totalInterest = 0.0; int N;
+        System.out.print("Enter principal amount: ");
+        P = sc.nextDouble();
+
+        System.out.print("Enter interest in %: ");
+        I = sc.nextDouble();
+
+        System.out.print("Enter total number of month(s): ");
+        N = sc.nextInt();
+
+        System.out.printf("Month%23s%17s%16s%22s%20s\n", "Monthly Payment", "Principal", "Interest", "Unpaid Balance", "Total Interest");
+
         for (int n = 1; n <= N; n++) {
-            // Principal portion due (Cn)
-            double Cn = M * Math.pow(1 + monthlyrate, -(1 + N - n));
-            double Ln = M - Cn;
-            double Rn = (Ln / monthlyrate) - Cn;
-            if (n == N || Rn < 0.01) {
-                Rn = 0.00;
-            }
-            totalInterestAccumulated += Ln;
-            System.out.printf("%-6d %18.2f %16.2f %15.2f %18.2f %18.2f%n", 
-                    n, M, Cn, Ln, Rn, totalInterestAccumulated);
+            M = (P * (I / (12 * 100))) / (1 - Math.pow((1 + (I / (12 * 100))), -N));
+            C = M * Math.pow((1 + (I / (12 * 100))), -(1 + N - n));
+            L = M - C;
+            R = (L / (I/ (12 * 100))) - C;
+            totalInterest += L;
+            System.out.printf("%s   %23.2f%17.2f%16.2f%22.2f%20.2f\n", (n < 10) ? n + " " : n, M, C, L, R, totalInterest);
         }
         
         //Q8
