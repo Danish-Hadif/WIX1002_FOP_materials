@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week5;
+
+/**
+ *
+ * @author Fadzli Sham Hussin
+ */
+import java.util.Scanner;
+
+public class Lab05Q6 {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the number of row of pascal triangle to generate: ");
+        int num = input.nextInt();
+        if (num <= 0) {
+            System.out.println("Number is invalid");
+            return;
+        }
+        int[][] arr = new int[num][num];
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < i; j++) {
+                if (j == 0 || j == i) {
+                    arr[i][j] = 1;
+                } else {
+                    arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+                }
+            }
+        }
+        System.out.println("The Pascal Triangle with " + num + " row(s)");
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < num; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+}
