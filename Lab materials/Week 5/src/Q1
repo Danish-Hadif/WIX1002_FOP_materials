@@ -1,0 +1,49 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week5;
+
+/**
+ Write a program to randomly generate N student scores (0-100). The program will
+prompt the user to enter N students and store the score in an array. Then, the program
+will display a list of score, the highest score, the lowest score and the average score.
+ */
+import java.util.Scanner;
+import java.util.Random;
+
+public class Lab05Q1 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+        int sum = 0;
+        System.out.println("Enter number of students: ");
+        int student = input.nextInt();
+        int[] arr = new int[student];
+        for(int i = 0; i<student;i++){
+            arr[i] = rand.nextInt(101);
+            sum += arr[i];
+        }
+        int max = arr[0];
+        int min = arr[0];
+        double average = sum/student;
+        for(int i =1; i<student;i++){
+            if(arr[i]>max){
+                max = arr[i];
+            }
+            if(arr[i]<min){
+                min = arr[i];
+            }
+        }
+        System.out.println("Score display: ");
+        for(int i = 0; i<student;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Max value is: "+ max);
+        System.out.println("Min value is: "+ min);
+        System.out.println("Average score value is: " + average);
+        
+    }
+    
+}
