@@ -1,0 +1,39 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week5;
+
+/**
+ Write a program that randomly generate the seven day work hours (1-8 hours) for N
+employee. Then, display the work hours in seven days and the total hours for each
+employee.
+ */
+import java.util.Random;
+import java.util.Scanner;
+public class Lab05Q3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+        System.out.println("Enter the number of employee: ");
+        int num = sc.nextInt();
+        int[][] arr = new int[num][7];
+        for(int i = 0; i<num; i++){
+            for(int j = 0; j<7; j++){
+                arr[i][j] = rand.nextInt(8)+1;
+            }
+        }
+        System.out.println("\n--- Employee Work Hours (7-Day Summary) ---");
+        System.out.println("Employee\tDay 1\tDay 2\tDay 3\tDay 4\tDay 5\tDay 6\tDay 7\t| Total");
+        System.out.println("----------------------------------------------------------------------------------");
+        for(int i =0; i<num; i++){
+            int totalwork = 0;
+            for(int j = 0; j<7;j++){
+                System.out.print(arr[i][j]+"\t");
+                totalwork += arr[i][j];
+            }
+            System.out.println("| " + totalwork + " hrs");
+        }
+    }
+    
+}
