@@ -1,0 +1,97 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Lab05Q5 {
+    public static void main(String[] args) {
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = new int[20];
+
+        // 1. Generate 20 random integers from 0 to 100
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rand.nextInt(101); // 0 to 100 inclusive
+        }
+
+        // Display original list
+        System.out.println("A list of 20 random integer within 0 to 100");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + (i == arr.length - 1 ? "" : ", "));
+        }
+        System.out.println();
+
+        // 2. Sort the array in descending order (using Selection Sort)
+        for (int i = 0; i < arr.length - 1; i++) {
+            int maxIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] > arr[maxIndex]) { // Looking for the largest for descending order
+                    maxIndex = j;
+                }
+            }
+            // Swap
+            int temp = arr[maxIndex];
+            arr[maxIndex] = arr[i];
+            arr[i] = temp;
+        }
+
+        // Display sorted array in descending order
+        System.out.println("Array in descending order");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + (i == arr.length - 1 ? "" : ", "));
+        }
+        System.out.println();
+
+        // 3. Accept an integer input from the user to search
+        System.out.print("Enter a number to search: ");
+        int target = scanner.nextInt();
+
+        // 4. Linear Search
+        int linearLoops = 0;
+        boolean linearFound = false;
+        for (int i = 0; i < arr.length; i++) {
+            linearLoops++;
+            if (arr[i] == target) {
+                linearFound = true;
+                break;
+            }
+        }
+
+        if (linearFound) {
+            System.out.println(target + " found");
+        } else {
+            System.out.println(target + " not found");
+        }
+        System.out.println("Linear Search - " + linearLoops + " loop(s)");
+
+        // 5. Binary Search (adapted for descending-order array)
+        int left = 0;
+        int right = arr.length - 1;
+        int binaryLoops = 0;
+        boolean binaryFound = false;
+
+        while (left <= right) {
+            binaryLoops++;
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                binaryFound = true;
+                break;
+            } else if (arr[mid] < target) {
+                // Since it's descending, smaller elements are to the right. 
+                // If mid is smaller than target, target must be in the left half.
+                right = mid - 1;
+            } else {
+                // If mid is larger than target, target must be in the right half.
+                left = mid + 1;
+            }
+        }
+
+        if (binaryFound) {
+            System.out.println(target + " found");
+        } else {
+            System.out.println(target + " not found");
+        }
+        System.out.println("Binary Search - " + binaryLoops + " loop(s)");
+
+        scanner.close();
+    }
+}
