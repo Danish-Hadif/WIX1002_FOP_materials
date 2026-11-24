@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week.pkg6;
+
+/**
+ Write a Java method that accepts an array of 10 integers. The method should reverse
+the integer in the array. Example, if the number is 1234, the number will change to
+4321. 
+ */
+
+public class Lab06Q3 {
+    public static void reversearr(int[] arr){
+        for(int i = 0; i<arr.length;i++){
+            int num = arr[i];
+            int reversed = 0;
+            while(num != 0){
+                int digit = num  % 10;
+                reversed = reversed *10 +digit;
+                num /= 10;
+                
+            }
+            arr[i] = reversed;
+        }
+    }
+    public static void main(String[] args) {
+        int[] numbers = {123,456};
+        System.out.println("Original Array: ");
+        for(int i = 0; i<numbers.length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.println();
+        reversearr(numbers);
+        System.out.println("Reversed Array: ");
+        for(int i = 0; i<numbers.length;i++){
+            System.out.print(numbers[i]+" ");
+        }
+        
+        
+    }
+    
+}
