@@ -1,0 +1,32 @@
+package week.pkg6;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author danishhadif
+ */
+
+public class Lab06Q1 {
+    public static int trangular(int n){
+        int sum =0;
+        for(int i = 1; i<=n;i++){
+            sum += n;
+            
+        }
+        return sum;
+        
+    }
+    public static void main(String[] args) {
+        System.out.println("The first 20 triangular numbers are: ");
+        for(int i =1;i<=20;i++){
+            int triNum = trangular(i);
+            System.out.print("T(" + i + ") = " + triNum+" ");
+        }
+        System.out.println();
+    }
+    
+}
