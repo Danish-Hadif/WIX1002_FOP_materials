@@ -1,0 +1,45 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package week.pkg6;
+
+/**
+ *
+ * @author danishhadif
+ */
+import java.util.Scanner;
+import java.util.Random;
+public class Lab06Q5 {
+    public static boolean check (int a, int b, int c){
+        return c == (a*b);
+    }
+    public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       Random random = new Random();
+       int score = 0;
+
+       System.out.println("Enter negative number to quit.");
+       while(true){
+           // Generate two random numbers between 0 and 12 (inclusive)
+            int num1 = random.nextInt(13); // 0 to 12
+            int num2 = random.nextInt(13); // 0 to 12
+
+            // Display the prompt to the user
+            System.out.print(num1 + " x " + num2 + " = ");
+            int userAnswer = scanner.nextInt();
+            
+            if(userAnswer < 0){
+                break;
+            }
+            if(check(num1, num2, userAnswer)){
+                score++;
+            }
+       }
+       // Display final score when the user quits
+        System.out.println("Your Score is " + score);
+        scanner.close();
+        
+    }
+    
+}
